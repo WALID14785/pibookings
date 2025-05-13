@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hébergement - Paiement en Pi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --pi-blue: #16b1ff;
+            --pi-dark: #1a237e;
+            --pi-light: #e8f4fc;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--pi-light);
+            color: #333;
+            line-height: 1.6;
+            background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.9);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--pi-dark);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 5px solid var(--pi-blue);
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .logo span {
+            color: var(--pi-blue);
+        }
+        
+        h1 {
+            margin-bottom: 30px;
+            color: var(--pi-dark);
+            text-align: center;
+        }
+        
+        .hotel-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .hotel-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hotel-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hotel-info {
+            padding: 20px;
+        }
+        
+        .hotel-name {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--pi-dark);
+        }
+        
+        .hotel-location {
+            color: #666;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hotel-location i {
+            margin-right: 5px;
+        }
+        
+        .hotel-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .price-amount {
+            font-size: 1.5rem;
+            color: var(--pi-blue);
+            font-weight: bold;
+        }
+        
+        .price-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--pi-blue);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: var(--pi-dark);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .search-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .hotel-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <header>
+            <div class="logo">
+                <i class="fas fa-hotel"></i> <span>π</span>Hébergement
+            </div>
+            <p>Trouvez et réservez votre hôtel - Paiement en Pi Network accepté</p>
+        </header>
+
+        <div class="container">
+            <h1>Trouvez votre hébergement idéal</h1>
+            
+            <div class="search-box">
+                <form class="search-form">
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" placeholder="Où allez-vous?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkin">Date d'arrivée</label>
+                        <input type="date" id="checkin">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkout">Date de départ</label>
+                        <input type="date" id="checkout">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guests">Voyageurs</label>
+                        <select id="guests">
+                            <option value="1">1 voyageur</option>
+                            <option value="2">2 voyageurs</option>
+                            <option value="3">3 voyageurs</option>
+                            <option value="4">4 voyageurs</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block">Rechercher</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="hotel-list">
+                <!-- Hôtel 1 -->
+                <div class="hotel-card">
+                    <div class="hotel-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Hôtel Pi Paradise</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Paris, France
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-label">À partir de</div>
+                                <div class="price-amount">120 π</div>
+                            </div>
+                            <a href="https://www.booking.com/index.fr.html?label=gen173nr-1BCAEoggI46AdIM1gEaOIBiAEBmAENuAEXyAEM2AEB6AEBiAIBqAIDuAKvmI_BBsACAdICJDI4ZTViMzAwLWM2MTQtNGU2NS1hMmZjLTNkY2EzYWZkMTcwZtgCBeACAQ&sid=f8f9ef665c7618c436de3775a27bf0b3&keep_landing=1&sb_price_type=total&" class="btn">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hôtel 2 -->
+                <div class="hotel-card">
+                    <div class="hotel-image" style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Pi Beach Resort</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Nice, France
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-label">À partir de</div>
+                                <div class="price-amount">180 π</div>
+                            </div>
+                            <a href="https://www.booking.com/index.fr.html?label=gen173nr-1BCAEoggI46AdIM1gEaOIBiAEBmAENuAEXyAEM2AEB6AEBiAIBqAIDuAKvmI_BBsACAdICJDI4ZTViMzAwLWM2MTQtNGU2NS1hMmZjLTNkY2EzYWZkMTcwZtgCBeACAQ&sid=f8f9ef665c7618c436de3775a27bf0b3&keep_landing=1&sb_price_type=total&" class="btn">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hôtel 3 -->
+                <div class="hotel-card">
+                    <div class="hotel-image" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Mountain π Lodge</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Chamonix, France
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-label">À partir de</div>
+                                <div class="price-amount">150 π</div>
+                            </div>
+                            <a href="https://www.booking.com/index.fr.html?label=gen173nr-1BCAEoggI46AdIM1gEaOIBiAEBmAENuAEXyAEM2AEB6AEBiAIBqAIDuAKvmI_BBsACAdICJDI4ZTViMzAwLWM2MTQtNGU2NS1hMmZjLTNkY2EzYWZkMTcwZtgCBeACAQ&sid=f8f9ef665c7618c436de3775a27bf0b3&keep_landing=1&sb_price_type=total&" class="btn">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://www.booking.com/index.fr.html?label=gen173nr-1BCAEoggI46AdIM1gEaOIBiAEBmAENuAEXyAEM2AEB6AEBiAIBqAIDuAKvmI_BBsACAdICJDI4ZTViMzAwLWM2MTQtNGU2NS1hMmZjLTNkY2EzYWZkMTcwZtgCBeACAQ&sid=f8f9ef665c7618c436de3775a27bf0b3&keep_landing=1&sb_price_type=total&" class="btn" style="padding: 15px 30px; font-size: 1.2rem;">
+                    Voir plus d'hôtels sur Booking.com
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 πHébergement - Tous droits réservés</p>
+            <p>Powered by Pi Network</p>
+        </footer>
+    </div>
+
+    <script>
+        // Redirection vers Booking.com avec les paramètres de recherche
+        document.querySelector('.search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const destination = document.getElementById('destination').value;
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+            
+            // Construire l'URL de Booking.com avec les paramètres
+            let bookingUrl = 'https://www.booking.com/index.fr.html?label=gen173nr-1BCAEoggI46AdIM1gEaOIBiAEBmAENuAEXyAEM2AEB6AEBiAIBqAIDuAKvmI_BBsACAdICJDI4ZTViMzAwLWM2MTQtNGU2NS1hMmZjLTNkY2EzYWZkMTcwZtgCBeACAQ&sid=f8f9ef665c7618c436de3775a27bf0b3&keep_landing=1&sb_price_type=total&';
+            
+            if(destination) {
+                bookingUrl += `&ss=${encodeURIComponent(destination)}`;
+            }
+            if(checkin) {
+                bookingUrl += `&checkin=${checkin}`;
+            }
+            if(checkout) {
+                bookingUrl += `&checkout=${checkout}`;
+            }
+            if(guests) {
+                bookingUrl += `&group_adults=${guests}`;
+            }
+            
+            window.location.href = bookingUrl;
+        });
+    </script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+  Pi.init({ version: "2.0" });
+</script>
+</body>
+</html>
